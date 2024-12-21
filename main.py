@@ -90,7 +90,12 @@ def load_file():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("SCAMPER Project - LLM Chatbot to improve student creativity")
     parser.add_argument("--load_file", action = 'store_true', help='load file instead of streaming')
+    parser.add_argument("--local", action = 'store_true', help='Wrapper to please git')
     args = parser.parse_args()
+
+    if args.local:
+        from api_key import OPENAI_API_KEY
+        os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
     if args.load_file:
         load_file()

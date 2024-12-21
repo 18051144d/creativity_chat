@@ -10,8 +10,6 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.messages import HumanMessage, SystemMessage
 
 import prompts
-from api_key import OPENAI_API_KEY
-os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 LANGAUGE_DICT = {
     'E': 'english',
