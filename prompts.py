@@ -22,16 +22,16 @@ In order to win the competition, your ideas should:
 #================================================LLM=============================================
 #================================================================================================
 
-
 USER_TEMPLATE = '''Student's Question: {question}'''
 
 CLS_TEMPLATE = '''
 You are a helpful AI teaching assistant in a class activity. The activity is as follows: {content}.
-You are now given a question from a student and you need to classify it as one of the following two types:
+You are now given a message from a student that suppose to be a question and you need to classify it as one of the following two types:
 1. Question for guidance: The student is looking for guidance e.g. group to focus on, how should he/she be asking etc
 2. Question for activity: The question is highly replated to the activity content.
-Return the class of the question as int: 1 or 2
-Here is the question: {question}
+3. Not a question at all. Something unrelated.
+Return the class of the question as int: 1, 2 or 3
+Here is the message: {question}
 '''
 
 GUIDE_TEMPLATE = '''

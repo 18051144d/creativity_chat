@@ -16,11 +16,13 @@ def print_and_save(question_idx, input_, llm_response):
     str_ += f'#{question_idx} {input_}\nLLM Response:\n'
     if llm_response['OUTPUT']['CLS'] == '1':
         str_ += 'Analysis: ' + textwrap.fill(llm_response['OUTPUT']['GUIDE'], width = 120) + '\n'
-    else:
+    elif llm_response['OUTPUT']['CLS'] == '2':
         str_ += 'Analysis: ' + textwrap.fill(llm_response['OUTPUT']['EVAL'], width = 120) + '\n'
         str_ += 'Suggestion: ' + textwrap.fill(llm_response['OUTPUT']['NEWQ'], width = 120) + '\n'
         str_ += f"SCAMPER element: {llm_response['MISC']['SCAMPER_ELEMENT']}\n"
-    str_ += f"Inference Cost: {llm_response['MISC']['cost_input'] + llm_response['MISC']['cost_output']:.6f}\n"
+    else:
+        str_ += f'The input does not seems to be a question. Please try again!\n'
+    str_ += f"Inference Cost: {llm_response['MISC']['cost_input'] + llm_response['MISC']['cost_output']:.6f}\n\n"
 
     print(str_)
     return str_
@@ -43,7 +45,7 @@ def stream():
     question_idx = 0
     while True:
         input_ = input('Type in your question, "Z" to reset language and activity, or "END" to end the chat: ')
-        if input_ == 'END':
+        if input_.upper() == 'END':
             break
         elif input_.upper() == 'Z':
             language, activity = collect_options()
